@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
+# This is the UsersController
 class UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
-
 
   # REGISTER
   def create
@@ -17,7 +19,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(username: params[:username])
 
-    if @user && @user.authenticate(params[:password])
+    if @user&.authenticate(params[:password])
       token = encode_token({ user_id: @user.id })
       render json: { user: @user, token: token }
     else

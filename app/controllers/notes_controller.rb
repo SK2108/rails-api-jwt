@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# This is the NotesController
 class NotesController < ApplicationController
-  before_action :set_note, only: %i[ show update destroy ]
+  before_action :set_note, only: %i[show update destroy]
   before_action :authorized # no access to notes unless you're logged in
 
   # GET /notes
@@ -18,7 +21,7 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user = @user
-    # @notes = Note.find_by user: @user.id 
+    # @notes = Note.find_by user: @user.id
 
     if @note.save
       render json: @note, status: :created, location: @note
@@ -42,13 +45,14 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def note_params
-      params.require(:note).permit(:title, :body, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def note_params
+    params.require(:note).permit(:title, :body, :user_id)
+  end
 end

@@ -1,6 +1,9 @@
-class User < ApplicationRecord
-    has_secure_password
+# frozen_string_literal: true
 
-    validates :username, presence: true, uniqueness: true 
-    validates :password, presence: true 
+# This is the User Model
+class User < ApplicationRecord
+  has_secure_password
+
+  validates :username, presence: true, uniqueness: true
+  validates :password, presence: true
 end

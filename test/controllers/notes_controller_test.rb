@@ -1,35 +1,37 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class NotesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @note = notes(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get notes_url, as: :json
     assert_response :success
   end
 
-  test "should create note" do
-    assert_difference("Note.count") do
+  test 'should create note' do
+    assert_difference('Note.count') do
       post notes_url, params: { note: { body: @note.body, title: @note.title, user_id: @note.user_id } }, as: :json
     end
 
     assert_response :created
   end
 
-  test "should show note" do
+  test 'should show note' do
     get note_url(@note), as: :json
     assert_response :success
   end
 
-  test "should update note" do
+  test 'should update note' do
     patch note_url(@note), params: { note: { body: @note.body, title: @note.title, user_id: @note.user_id } }, as: :json
     assert_response :success
   end
 
-  test "should destroy note" do
-    assert_difference("Note.count", -1) do
+  test 'should destroy note' do
+    assert_difference('Note.count', -1) do
       delete note_url(@note), as: :json
     end
 
